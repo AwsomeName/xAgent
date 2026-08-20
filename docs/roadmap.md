@@ -1,5 +1,8 @@
 # 路线图
 
+本文件保留阶段摘要；评测方法、系统边界、验收门槛和近期执行清单见
+[产品与实施规划](product-plan.md)。
+
 ## Phase 0：可运行骨架（当前）
 
 - 统一 Task / Agent / Result 协议；
@@ -20,7 +23,7 @@
 
 - 优先接入 Harbor/Inspect 可复用任务，而不是复制数据；
 - 接入 SWE-bench Verified 或更新的防污染代码任务子集；
-- 接入 τ-bench/τ²-bench 类工具交互任务；
+- 接入 τ³-bench 文本 `base` 子集等工具交互任务；
 - Docker/远程沙箱、资源限制、网络策略和副作用审计。
 
 ## Phase 3：自研 Agent

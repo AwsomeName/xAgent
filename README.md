@@ -46,6 +46,19 @@ uv run pytest
 uv run ruff check .
 ```
 
+## 本地评测定义台
+
+`web/` 提供一个本地静态控制台，用于按顺序确定任务范围、数据范围、Agent 框架、
+测试方案和评价指标。配置只保存在当前浏览器，也可以导入或导出 JSON。
+
+```bash
+cd web
+npm install
+npm run dev
+```
+
+打开 <http://localhost:3000>。网页工具链需要 Node.js 22.13 或更高版本。
+
 ## 接入真实 Agent
 
 ### 命令行桥接（推荐用于不同框架）
@@ -98,6 +111,7 @@ API Key 只从环境变量读取，不会写入实验记录。
 
 完整设计、调研和路线图见：
 
+- [产品与实施规划](docs/product-plan.md)
 - [架构说明](docs/architecture.md)
 - [开源项目与数据集调研](docs/research/landscape-2026-08.md)
 - [路线图](docs/roadmap.md)

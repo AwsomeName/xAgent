@@ -141,6 +141,7 @@ API Key 只从环境变量读取，不会写入实验记录。
 - [架构说明](docs/architecture.md)
 - [开源项目与数据集调研](docs/research/landscape-2026-08.md)
 - [路线图](docs/roadmap.md)
+- [服务器开发交接](docs/handoff.md)
 - [贡献指南](CONTRIBUTING.md)
 
 ## 命名说明

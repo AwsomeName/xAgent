@@ -3,6 +3,17 @@
 本调研优先引用项目官方仓库和文档。结论是：不应从零复制成熟 benchmark，xAgent
 更适合先成为统一适配、实验编排和结果治理层，再按任务类型复用上游数据与环境。
 
+## 与当前项目主线的关系
+
+长期仍要建设公平比较不同 Agent、框架和模型的平台，但评测能力最终服务于自研 Agent
+框架。当前不立即铺开下列 benchmark，而是先接入 Enginuity Bench，从中定义一个可
+自动评分的文档与工程视觉任务，由统一平台完整维护数据、任务、配置、执行、日志、评分
+和报告，并对比 Claude Code 与 Codex。本文调研结果用于最小闭环之后的任务扩展和
+框架选型。
+
+外部数据集不直接进入临时评测脚本，而是先登记为平台 `Dataset`，再由平台生成和维护
+`TaskDefinition`。首个接入数据集确定为 Enginuity Bench；后续数据集沿用相同流程。
+
 ## 取舍结论
 
 | 优先级 | 项目 | 建议 |
@@ -25,7 +36,7 @@ Google ADK、Pydantic AI、Microsoft Agent Framework 可作为第二轮；AutoGe
 | [Harbor](https://github.com/harbor-framework/harbor) | 统一运行多类 Agent；容器任务；本地/云端并发；也服务 RL rollout | 中期优先做兼容或转换层，避免自建一套不兼容的容器任务标准 |
 | [Inspect AI](https://inspect.aisi.org.uk/) | solver/scorer/模型解耦，日志查看，Agent 与多 Agent 支持 | scorer 必须是一等对象；报告要能下钻到完整样本和轨迹 |
 | [AgentBench](https://github.com/THUDM/AgentBench) | OS、DB、知识图谱、WebShop 等多环境；任务/Agent/客户端解耦 | 环境服务和 Agent 运行时应独立部署；不要假设所有任务资源需求相同 |
-| [AgentCompass](https://github.com/open-compass/AgentCompass) | benchmark、harness 和 Docker 环境的配置化组合 | experiment matrix 和显式版本配置应进入 Phase 1 |
+| [AgentCompass](https://github.com/open-compass/AgentCompass) | benchmark、harness 和 Docker 环境的配置化组合 | experiment matrix 和显式版本配置在最小闭环后进入 Phase 3 |
 
 ## 代表性任务与数据
 
@@ -61,12 +72,14 @@ Google ADK、Pydantic AI、Microsoft Agent Framework 可作为第二轮；AutoGe
 
 ## 建议的首批实验
 
-1. **协议 smoke test**：确定性小任务，验证各 adapter 的 I/O、错误和 token 记录。
-2. **工具调用可靠性**：20–50 个本地可重置工具任务，加 BFCL 子集，统计成功率、无效调用和恢复次数。
-3. **代码任务小样本**：选择许可明确、可稳定构建、近期创建的 issue，避免先承担完整
+1. **Enginuity 最小闭环**：接入一个版本化数据切片和可自动评分的任务，先对比 Claude
+   Code 与 Codex，并验证平台能维护完整运行生命周期。
+2. **协议 smoke test**：确定性小任务，验证各 adapter 的 I/O、错误和 token 记录。
+3. **工具调用可靠性**：20–50 个本地可重置工具任务，加 BFCL 子集，统计成功率、无效调用和恢复次数。
+4. **代码任务小样本**：选择许可明确、可稳定构建、近期创建的 issue，避免先承担完整
    SWE-bench 的成本。
-4. **长程任务**：固定预算，记录检查点、重复动作、人工介入和终止原因。
-5. **同模型跨框架 / 同框架跨模型**：每项至少多次运行，报告置信区间而非单点排行榜。
+5. **长程任务**：固定预算，记录检查点、重复动作、人工介入和终止原因。
+6. **同模型跨框架 / 同框架跨模型**：每项至少多次运行，报告置信区间而非单点排行榜。
 
 ## 有价值但不直接复制的内容
 
